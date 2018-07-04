@@ -82,7 +82,8 @@ class WorldCupService {
             switch (response.result) {
             case .success(let json):
                 let jsonList = (json as! [JSON])
-                let matches = jsonList.map({ Match(json: $0) }) 
+                let matches = jsonList.filter({ $0["status"] as? String != "future" })
+                    .map({ Match(json: $0) })
                 onSuccess(matches)
             case .failure(let error):
                 onFailure(error)

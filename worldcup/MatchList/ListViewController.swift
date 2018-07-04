@@ -21,13 +21,9 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var viewModel: ListViewModel?
     
-    //    convenience init(viewModel: ListViewModel) {
-    //        self.init()
-    //        self.viewModel = viewModel
-    //    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "World Cup 2018"
         tableView.register(
             UINib(nibName: "MatchTableViewCell", bundle: nil),
             forCellReuseIdentifier: ListViewController.cellReuseIdentifier)
@@ -39,6 +35,7 @@ class ListViewController: UIViewController {
     
     func populate(matches: [Match]) {
         self.viewModel = ListViewModel(matches: matches)
+        self.tableView.reloadData()
     }
     
     func alert(error: Error) {

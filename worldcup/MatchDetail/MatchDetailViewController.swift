@@ -9,7 +9,7 @@ struct MatchDetailViewModel {
     
     init(match: Match) {
         self.goals = (match.homeResult.goals + match.awayResult.goals).sorted(
-            by: {$0.minute > $1.minute})
+            by: {$0.minute < $1.minute})
         let result = match
         self.matchDescription = "\(result.homeResult.team) \(result.homeResult.nGoals) - \(result.awayResult.nGoals) \(result.awayResult.team)"
     }
@@ -36,8 +36,8 @@ class MatchDetailViewController: UIViewController {
         self.matchResultLabel.text = viewModel.matchDescription
         
         scorerTableView.register(
-            UINib(nibName: "MatchTableViewCell", bundle: nil),
-            forCellReuseIdentifier: ListViewController.cellReuseIdentifier)
+            UINib(nibName: "GoalTableViewCell", bundle: nil),
+            forCellReuseIdentifier: MatchDetailViewController.cellReuseIdentifier)
         scorerTableView.delegate = self
         scorerTableView.dataSource = self
         scorerTableView.separatorStyle = .none
